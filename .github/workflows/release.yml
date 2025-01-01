@@ -36,6 +36,10 @@ jobs:
       with:
         version: 1.8.5
 
+    - name: Install dependencies
+      run: |
+        poetry install --with dev  # Install dev dependencies which include commitizen
+
     - name: Update version
       run: |
         git config --global user.name "github-actions"
