@@ -48,7 +48,7 @@ A robust static and dynamic QR code generator built with FastAPI and modern Pyth
 
 2. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/qr-gen.git
+   git clone https://github.com/gsinghjay/qr-gen.git
    cd qr-gen
    ```
 
@@ -167,3 +167,35 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🗺️ Roadmap
 
 See [ROADMAP.md](ROADMAP.md) for the development roadmap.
+
+## 🔄 Git Workflow
+
+1. Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+
+2. Make changes and commit:
+   ```bash
+   # Stage your changes
+   git add .
+
+   # Commit with conventional format
+   git commit -m "type(scope): description"
+   ```
+
+3. Common commit types:
+   - `feat`: New feature
+   - `fix`: Bug fix
+   - `docs`: Documentation changes
+   - `style`: Formatting changes
+   - `refactor`: Code refactoring
+   - `test`: Adding/updating tests
+   - `chore`: Maintenance tasks
+
+4. Pre-commit hooks will:
+   - Format code with black
+   - Sort imports with isort
+   - Check YAML files
+   - Validate commit messages
+   - Generate requirements.txt
