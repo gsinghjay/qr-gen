@@ -44,6 +44,11 @@ jobs:
 
     - name: Update version
       run: |
+        # Delete local tag if it exists
+        git tag -d v0.1.1 || true
+        # Delete remote tag if it exists
+        git push origin :refs/tags/v0.1.1 || true
+        # Now run cz bump
         poetry run cz bump --yes
       env:
         GIT_COMMITTER_NAME: "github-actions[bot]"
