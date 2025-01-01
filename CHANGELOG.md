@@ -2,6 +2,29 @@
 
 
 
+## v0.1.1 (2025-01-01)
+
+### Fix
+
+* fix(release): install commitizen in release workflow
+
+# Why:
+- Fix release workflow failure
+- Enable automated version bumping
+- Ensure all required tools are available
+
+# What:
+- Added dependency installation step
+- Included dev dependencies in Poetry install
+- Maintained existing release configuration ([`11b30a7`](https://github.com/gsinghjay/qr-gen/commit/11b30a7352d7edd85a2bdd50472781dbc5b28df3))
+
+### Unknown
+
+* Merge pull request #3 from gsinghjay/test/release-workflow
+
+fix(release): install commitizen in release workflow ([`93de1e6`](https://github.com/gsinghjay/qr-gen/commit/93de1e69ce263cbfdc4a852b6150eea1b67f925f))
+
+
 ## v0.1.0 (2025-01-01)
 
 ### Build
