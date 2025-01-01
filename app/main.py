@@ -3,6 +3,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+
 def create_app() -> FastAPI:
     """Create FastAPI application."""
     app = FastAPI(
@@ -22,4 +23,5 @@ def create_app() -> FastAPI:
 
     return app
 
-app = create_app()
+
+fastapi_app = create_app()

@@ -31,6 +31,7 @@ isort = "^5.13.2"
 mypy = "^1.8.0"
 pre-commit = "^3.6.0"
 commitizen = "^3.14.1"
+pylint = "^3.0.3"
 
 [tool.poetry.group.test]
 optional = true
@@ -76,4 +77,17 @@ tag_format = "v$version"
 version_files = [
     "pyproject.toml:version",
     "app/__init__.py:__version__"
-] 
+]
+
+[tool.pylint.messages_control]
+disable = [
+    "missing-docstring",
+    "too-few-public-methods",
+]
+
+[tool.pylint.format]
+max-line-length = 88
+
+[tool.pylint.design]
+max-args = 8
+max-attributes = 8 

@@ -1,195 +1,201 @@
-# QR Code Generator Roadmap
+# QR Code Generator
 
-### **Phase 1: Project Setup and Standards**
+[![CI](https://github.com/gsinghjay/qr-gen/actions/workflows/ci.yml/badge.svg)](https://github.com/gsinghjay/qr-gen/actions/workflows/ci.yml)
+[![Release](https://github.com/gsinghjay/qr-gen/actions/workflows/release.yml/badge.svg)](https://github.com/gsinghjay/qr-gen/actions/workflows/release.yml)
+[![codecov](https://codecov.io/gh/gsinghjay/qr-gen/branch/main/graph/badge.svg)](https://codecov.io/gh/gsinghjay/qr-gen)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-- **Configure Development Environment:**
-    - **Python:** Ensure Python 3.11+ is installed
-    - **Poetry:** Initialize project with Poetry:
-        ```bash
-        poetry init
-        poetry add fastapi uvicorn pydantic sqlalchemy
-        poetry add --group dev pytest pytest-cov black isort mypy
-        ```
-    - **Git Hooks:** Set up pre-commit hooks
-    - **Docker:** Install Docker for containerization
+A robust static and dynamic QR code generator built with FastAPI and modern Python practices.
 
-- **Project Structure:**
-    ```
-    qr-gen/
-    ├── app/
-    │   ├── __init__.py
-    │   ├── main.py           # FastAPI application initialization
-    │   ├── dependencies.py   # FastAPI dependencies
-    │   ├── routers/         # API routes
-    │   │   ├── __init__.py
-    │   │   ├── qr_codes.py
-    │   │   └── users.py
-    │   ├── crud/           # Database operations
-    │   │   ├── __init__.py
-    │   │   ├── qr_code.py
-    │   │   └── user.py
-    │   ├── schemas/        # Pydantic models
-    │   │   ├── __init__.py
-    │   │   ├── qr_code.py
-    │   │   └── user.py
-    │   ├── models/         # SQLAlchemy models
-    │   │   ├── __init__.py
-    │   │   ├── qr_code.py
-    │   │   └── user.py
-    │   ├── external_services/
-    │   │   ├── __init__.py
-    │   │   └── qr_generator.py
-    │   └── utils/
-    │       ├── __init__.py
-    │       ├── security.py
-    │       └── logging.py
-    ├── tests/
-    │   ├── __init__.py
-    │   ├── conftest.py
-    │   ├── test_qr_codes.py
-    │   └── test_users.py
-    ├── .github/
-    │   └── workflows/
-    │       ├── ci.yml
-    │       └── release.yml
-    ├── pyproject.toml
-    ├── .pre-commit-config.yaml
-    ├── .env.example
-    └── README.md
-    ```
+## 🚀 Features
 
-- **Configure Project Standards:**
-    - Initialize Git repository with conventional commits
-    - Set up semantic versioning
-    - Configure pre-commit hooks:
-        ```yaml
-        # .pre-commit-config.yaml
-        repos:
-          - repo: https://github.com/commitizen-tools/commitizen
-          - repo: https://github.com/psf/black
-          - repo: https://github.com/pycqa/isort
-          - repo: https://github.com/pre-commit/mirrors-mypy
-        ```
+- FastAPI-based REST API
+- Clean Architecture
+- Automated testing with pytest
+- Semantic versioning with Commitizen
+- Type checking with mypy
+- Code formatting with black and isort
+- Git hooks with pre-commit
+- Comprehensive test coverage
+- Structured logging
+- Prometheus metrics
 
-### **Phase 2: REPL Development**
+## 🛠️ Tech Stack
 
-- **Create a REPL Interface:**
-    - Determine the scope and functionality of your REPL. Consider whether it will interact primarily with QR code generation functions or have broader access to application components, including user management.
-    - Implement the REPL using the chosen library, ensuring it can load and interact with the relevant parts of your project.
-    - Thoroughly test the REPL interface to ensure it behaves as expected.
+- Python 3.11+
+- FastAPI
+- SQLAlchemy (with async support)
+- Poetry
+- Pytest
+- Alembic
+- Pydantic V2
+- Commitizen
 
-### **Phase 3: Core Implementation**
+## 📦 Installation
 
-- **Database Models (`app/models/`):**
-    - Implement SQLAlchemy models:
-        ```python
-        # app/models/qr_code.py
-        class QRCode(Base):
-            __tablename__ = "qr_codes"
-            # model definition
-        ```
-    - Set up database migrations with Alembic
+1. Prerequisites:
+   ```bash
+   # Install Python 3.11+
+   python --version  # Should be 3.11+
 
-- **Pydantic Schemas (`app/schemas/`):**
-    - Define request/response models:
-        ```python
-        # app/schemas/qr_code.py
-        class QRCodeCreate(BaseModel):
-            # schema definition
-        ```
+   # Install Poetry
+   curl -sSL https://install.python-poetry.org | python3 -
+   ```
 
-- **CRUD Operations (`app/crud/`):**
-    - Implement database operations
-    - Add transaction management
-    - Include error handling
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/gsinghjay/qr-gen.git
+   cd qr-gen
+   ```
 
-- **External Services (`app/external_services/`):**
-    - QR code generation service
-    - Image processing utilities
-    - External API integrations
+3. Install dependencies:
+   ```bash
+   poetry install  # Install all dependencies
+   poetry install --without dev,test  # Production only
+   ```
 
-### **Phase 4: API Development**
+4. Set up pre-commit hooks:
+   ```bash
+   poetry run pre-commit install
+   poetry run pre-commit install --hook-type commit-msg  # For Commitizen
+   ```
 
-- **Router Implementation (`app/routers/`):**
-    - QR code endpoints
-    - User management
-    - Authentication routes
+## 🏗️ Project Structure
 
-- **Dependencies (`app/dependencies.py`):**
-    - Database session management
-    - Authentication dependencies
-    - Rate limiting
+```
+qr-gen/
+├── app/
+│   ├── core/          # Application configuration
+│   ├── crud/          # Database operations
+│   ├── models/        # SQLAlchemy models
+│   ├── schemas/       # Pydantic models
+│   ├── routers/       # API routes
+│   └── external_services/  # External integrations
+├── tests/             # Test suite
+└── docs/             # Documentation
+```
 
-- **Security (`app/utils/security.py`):**
-    - JWT implementation
-    - Password hashing
-    - Rate limiting middleware
+## 🧪 Testing
 
-### **Phase 5: Testing and Quality Assurance**
+Run the test suite:
+```bash
+# Run all tests
+poetry run pytest
 
-- **Unit Tests (`tests/`):**
-    ```python
-    # tests/test_qr_codes.py
-    def test_create_qr_code():
-        # test implementation
-    ```
-    - Test database operations
-    - API endpoint testing
-    - Authentication tests
+# Run with coverage
+poetry run pytest --cov=app
 
-- **Integration Tests:**
-    - End-to-end API tests
-    - External service mocking
-    - Database integration tests
+# Run specific tests
+poetry run pytest tests/test_main.py -v
+```
 
-### **Phase 6: Monitoring and Logging**
+## 📝 Development
 
-- **Logging Setup (`app/utils/logging.py`):**
-    - Structured logging
-    - Request/response logging
-    - Error tracking
+1. Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature
+   ```
 
-- **Metrics Collection:**
-    - Prometheus metrics
-    - Performance monitoring
-    - Error rate tracking
+2. Make changes and commit using Commitizen:
+   ```bash
+   poetry run cz commit
+   ```
 
-### **Phase 7: Deployment**
+3. Bump version and update CHANGELOG:
+   ```bash
+   poetry run cz bump --changelog
+   ```
 
-- **Docker Configuration:**
-    ```dockerfile
-    # Dockerfile
-    FROM python:3.11-slim
-    WORKDIR /app
-    COPY poetry.lock pyproject.toml ./
-    RUN pip install poetry && poetry install
-    ```
+## 🔄 Commit Convention
 
-- **Environment Configuration:**
-    - Environment variables
-    - Configuration management
-    - Secrets handling
+We use [Conventional Commits](https://www.conventionalcommits.org/) with Commitizen:
 
-### **Phase 8: Documentation**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation
+- `style`: Formatting
+- `refactor`: Code refactoring
+- `test`: Testing
+- `chore`: Maintenance
 
-- **API Documentation:**
-    - OpenAPI/Swagger setup
-    - Usage examples
-    - Authentication documentation
+## 🚀 Running the Application
 
-- **Development Guide:**
-    - Setup instructions
-    - Contributing guidelines
-    - Architecture overview
+1. Set up environment variables:
+   ```bash
+   cp .env.example .env
+   # Edit .env with your settings
+   ```
 
-### **Phase 9: Maintenance**
+2. Run the application:
+   ```bash
+   # Development
+   poetry run uvicorn app.main:app --reload
 
-- **Performance Optimization:**
-    - Query optimization
-    - Caching implementation
-    - Resource utilization
+   # Production
+   poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000
+   ```
 
-- **Security Updates:**
-    - Dependency updates
-    - Security patches
-    - Vulnerability scanning
+## 📚 API Documentation
+
+Once running, access:
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
+
+## 🔄 Version Management
+
+We use semantic versioning (MAJOR.MINOR.PATCH):
+- MAJOR: Breaking changes
+- MINOR: New features (backwards compatible)
+- PATCH: Bug fixes (backwards compatible)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit changes with `poetry run cz commit`
+4. Push to the branch
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🗺️ Roadmap
+
+See [ROADMAP.md](ROADMAP.md) for the development roadmap.
+
+## 🔄 Git Workflow
+
+1. Create a new branch:
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+
+2. Make changes and commit:
+   ```bash
+   # Stage your changes
+   git add .
+
+   # Commit with conventional format
+   git commit -m "type(scope): description"
+   ```
+
+3. Common commit types:
+   - `feat`: New feature
+   - `fix`: Bug fix
+   - `docs`: Documentation changes
+   - `style`: Formatting changes
+   - `refactor`: Code refactoring
+   - `test`: Adding/updating tests
+   - `chore`: Maintenance tasks
+
+4. Pre-commit hooks will:
+   - Format code with black
+   - Sort imports with isort
+   - Check YAML files
+   - Validate commit messages
+   - Generate requirements.txt

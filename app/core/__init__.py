@@ -1,1 +1,1 @@
-"""Core package.""" 
+"""Core module for the application."""
