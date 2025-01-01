@@ -53,3 +53,9 @@ jobs:
       run: |
         poetry run black . --check
         poetry run isort . --check 
+
+    - name: Validate Commit Messages
+      run: |
+        pip install commitizen
+        cz check --rev-range $(git merge-base origin/main HEAD)..HEAD
+      if: github.event_name == 'pull_request' 
