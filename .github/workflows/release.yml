@@ -44,17 +44,10 @@ jobs:
 
     - name: Update version
       run: |
-        # Delete local tag if it exists
-        git tag -d v0.1.1 || true
-        # Delete remote tag if it exists
-        git push origin :refs/tags/v0.1.1 || true
-        # Now run cz bump
-        poetry run cz bump --yes
+        poetry run cz bump --yes --changelog-format angular
       env:
         GIT_COMMITTER_NAME: "github-actions[bot]"
         GIT_COMMITTER_EMAIL: "github-actions[bot]@users.noreply.github.com"
-        GIT_AUTHOR_NAME: "github-actions[bot]"
-        GIT_AUTHOR_EMAIL: "github-actions[bot]@users.noreply.github.com"
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
@@ -64,4 +57,11 @@ jobs:
       with:
         tag_name: ${{ steps.tag_version.outputs.tag }}
         name: Release ${{ steps.tag_version.outputs.tag }}
-        body: ${{ steps.tag_version.outputs.changelog }}
+        body: |
+          ## What's Changed
+          ${{ steps.tag_version.outputs.changelog }}
+
+          ## Installation
+          ```bash
+          poetry add qr-gen@${{ steps.tag_version.outputs.tag }}
+          ```
